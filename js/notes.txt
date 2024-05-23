@@ -1,0 +1,63 @@
+
+1. add products to cart in buy()
+    get the id of the product (from where)
+    when blue buttons pressed execute function buy()
+    locate product using id in the products array
+    then include in cart array
+
+    check if product was already added to the cart array
+
+    if not, add it to array, add property quantity with value 1
+
+    if yes, increase quantity by 1
+
+
+ideas of how to use functions from 2.1:
+
+...
+
+2. Empty the cart with cleanCart()
+    has to reinitialize the cart variable (= 0?)
+
+3. Calculate total of cart
+    use for loop to add up amount all the products
+
+    function from 2.1: the reduce one probably
+
+4. Promotions with applyPromotionsCart()
+    two types:
+    20% discount for 3 or more oil bottles
+    30% discount for 10 or more cupcakes
+
+    function receives the cart array
+    modifies the subtotalWithDiscount if promotion applies (dynamically?)
+
+    1. can a discount be applied?
+    2. If yes, discounted price has to be saved under subtotalWithDiscount
+    3. If no, no changes have to be applied
+
+
+5. Show the shopping cart to the user with printCart()
+    has to use object with id cartModal
+    cartModal has to be modified to be dynamic...
+
+
+6. Checkout form with checkout.js
+    set the conditions for completing the form:
+        1. all fields obligatory
+        2. all fields at least 3 characters
+        3. only letters for name and surname
+        4. only numbers for phone number
+        5. letters and numbers for password
+        6. the email has to be in email format
+
+    any field that doesn't comply has to be turned red 
+    and have a message appear below
+    (using a border or bootstrap??)
+
+7. Remove things from cart with removeFromCart()
+    one by one actually
+    if only one is left, don't set quantity to 0, instead delete it
+    update the promotions dynamically
+
+8. Make it pretty...
