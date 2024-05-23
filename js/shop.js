@@ -74,30 +74,103 @@ var cart = [];
 
 var total = 0;
 
+var numberItems = 0;
+
 // Exercise 1
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cart array
+    
+    products.forEach(product => {
+        if (id === product.id) {
+            if (id === product.id) {
+                
+                let productCart = cart.find(product => product.id === id);
+                // 2. Add found product to the cart array
+                if (productCart) {
+                    productCart.quantity += 1;
+                } else {
+                    cart.push({...product, quantity: 1});
+                }
+                console.log(cart);
+
+                numberItems += 1;
+                console.log(`number of items: ${numberItems}`);
+                document.getElementById('count_product').textContent = numberItems;
+            }
+        }
+    });
+
+applyPromotionsCart();
+calculateTotal();
+   
 }
 
 // Exercise 2
 function cleanCart() {
-
+    cart = [];
+    console.log(cart);
+    printCart();
+    numberItems = 0;
+    console.log(`number of items: ${numberItems}`);
+    document.getElementById('count_product').textContent = numberItems;
 }
 
 // Exercise 3
 function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
+    total = cart.reduce(
+        (accumulator, product) => accumulator + (product.price * product.quantity), 0
+    );
+    console.log(total.toFixed(2));
 }
 
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    cart.forEach (item => {
+        if (item.id === 1) {
+            if (item.quantity >= 3) {
+                item.price = (10.5 * 0.8).toFixed(2);
+                document.getElementById('price_oil').innerHTML = `<s>$10.5</s> $${item.price}`;
+            }
+        } else if (item.id === 3) {
+            if (item.quantity >= 10) {
+                item.price = (5 * 0.7).toFixed(2);
+                document.getElementById('price_cupcakes').innerHTML = `<s>$5</s> $${item.price}`;
+            }
+        }
+    });
+
 }
 
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+
+    const cartList = document.getElementById('cart_list');
+
+    cartList.innerHTML = '';
+
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+            const total = item.price * item.quantity;
+            totalPrice += total;
+            const itemPrice = parseFloat(item.price);
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <th scope="row">${product.name}</th>
+                <td>$${itemPrice.toFixed(2)}</td>
+                <td>${item.quantity}</td>
+                <td>$${total.toFixed(2)}</td>
+            `;
+            cartList.appendChild(row);
+        }
+    });
+    document.getElementById('total_price').textContent = totalPrice.toFixed(2);
 }
 
 
@@ -105,7 +178,13 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
-
+    cart.forEach(item => {
+        if (item.id === id) {
+            cart.filter(function(value){
+                return value !== id;
+            });
+        }
+    });                 // Incomplete
 }
 
 function open_modal() {
