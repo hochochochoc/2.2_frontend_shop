@@ -30,12 +30,7 @@ function validate(event) {
 		fName.classList.add('is-invalid');
 		errorName.innerText = 'This field is required and must have at least 3 characters.';
 		error++;
-	} else {
-		fName.classList.remove('is-invalid');
-		errorName.innerText = '';
-	}
-
-	if(/[^a-zA-Z]/.test(fName.value)){
+	} else if(/[^a-zA-Z]/.test(fName.value)){
 		fName.classList.add('is-invalid');
 		errorName.innerText = 'Invalid first name!! Must be all letters with no digits.';
 		error++;
@@ -44,12 +39,14 @@ function validate(event) {
 		errorName.innerText = '';
 	}
 
-	
-
-	if(fEmail.value == ''){
+	if(fEmail.value == '' || fEmail.value.length < 3 || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(fEmail.value)){
+		fEmail.classList.add('is-invalid');
+		errorEmail.innerText = 'This field is required, must be in email format and have at least 3 characters.';
 		error++;
+	} else {
+		fEmail.classList.remove('is-invalid');
+		errorEmail.innerText = '';
 	}
-
 
 	if(fAddress.value === '' || fAddress.value === null || fAddress.value.length < 3){
 		fAddress.classList.add('is-invalid');
@@ -58,10 +55,6 @@ function validate(event) {
 	} else {
 		fAddress.classList.remove('is-invalid');
 		errorAddress.innerText = '';
-	}
-
-	if(fLastN.value == ''){
-		error++;
 	}
 
 	if(fLastN.value === '' || fLastN.value === null || fLastN.value.length < 3){
@@ -77,8 +70,17 @@ function validate(event) {
 		errorLastN.innerText = '';
 	}
 
-	if(fPassword.value == ''){
+	if(fPassword.value == fPassword.value === null || fPassword.value.length < 3){
+		fPassword.classList.add('is-invalid');
+		errorPassword.innerText = 'This field is required and must have at least 3 characters. Enter a correct password.';
 		error++;
+	} else if(!/(?=.*[a-zA-Z])(?=.*\d)/.test(fPassword.value)){
+		fPassword.classList.add('is-invalid');
+		errorPassword.innerText = 'Enter a correct password. Must contain at least one letter and one digit.';
+		error++;
+	} else {
+		fPassword.classList.remove('is-invalid');
+		errorPassword.innerText = '';
 	}
 
 	if(fPhone.value == '' || isNaN(fPhone.value) || fPhone.value.length != 9){
@@ -89,7 +91,6 @@ function validate(event) {
 		fPhone.classList.remove('is-invalid');
 		errorPhone.innerText = '';
 	}
-
 
 	if(error>0){
 		alert("Error");
