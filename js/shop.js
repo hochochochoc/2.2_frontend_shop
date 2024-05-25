@@ -81,7 +81,7 @@ function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
     
     products.forEach(product => {
-        if (id === product.id) {
+        
             if (id === product.id) {
                 
                 let productCart = cart.find(product => product.id === id);
@@ -91,17 +91,15 @@ function buy(id) {
                 } else {
                     cart.push({...product, quantity: 1});
                 }
-                console.log(cart);
 
                 numberItems += 1;
-                console.log(`number of items: ${numberItems}`);
                 document.getElementById('count_product').textContent = numberItems;
             }
-        }
+        
     });
 
-applyPromotionsCart();
-calculateTotal();
+    applyPromotionsCart();
+    calculateTotal();
    
 }
 
@@ -131,16 +129,22 @@ function applyPromotionsCart() {
         if (item.id === 1) {
             if (item.quantity >= 3) {
                 item.price = (10.5 * 0.8).toFixed(2);
-                document.getElementById('price_oil').innerHTML = `<s>$10.5</s> $${item.price}`;
+                document.getElementById('price_oil').innerHTML = `<s>$10.5</s> Discount applies: $${item.price}`;
+            } else if (item.quantity < 3) {
+                item.price = 10.50;
+                document.getElementById('price_oil').innerHTML = `$${item.price}`;
             }
+
         } else if (item.id === 3) {
             if (item.quantity >= 10) {
                 item.price = (5 * 0.7).toFixed(2);
-                document.getElementById('price_cupcakes').innerHTML = `<s>$5</s> $${item.price}`;
+                document.getElementById('price_cupcakes').innerHTML = `<s>$5</s> Discount applies: $${item.price}`;
+            } else if (item.quantity < 10) {
+                item.price = 5.00;
+                document.getElementById('price_cupcakes').innerHTML = `$${item.price}`;
             }
         }
     });
-
 }
 
 // Exercise 5
@@ -178,13 +182,26 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
-    cart.forEach(item => {
-        if (item.id === id) {
-            cart.filter(function(value){
-                return value !== id;
-            });
+    products.forEach(product => {
+        if (id === product.id) {
+            let productCart = cart.find(product => product.id === id);
+            
+            if (productCart) {
+                if (productCart.quantity > 1) {
+                    productCart.quantity -= 1;
+                } else {
+                    let productIndex = cart.findIndex(product => product.id === id);
+                    cart.splice(productIndex, 1);
+                }
+
+            numberItems -= 1;
+            document.getElementById('count_product').textContent = numberItems;
+            }
         }
-    });                 // Incomplete
+    });
+
+    applyPromotionsCart();
+    calculateTotal();             
 }
 
 function open_modal() {
