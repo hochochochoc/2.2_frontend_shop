@@ -74,10 +74,33 @@ var cart = [];
 
 var total = 0;
 
+var numberItems = 0;
+
 // Exercise 1
 function buy(id) {
     // 1. Loop for to the array products to get the item to add to cart
-    // 2. Add found product to the cart array
+    
+    products.forEach(product => {
+        
+            if (id === product.id) {
+                
+                let productCart = cart.find(product => product.id === id);
+                // 2. Add found product to the cart array
+                if (productCart) {
+                    productCart.quantity += 1;
+                } else {
+                    cart.push({...product, quantity: 1});
+                }
+
+                numberItems += 1;
+                document.getElementById('count_product').textContent = numberItems;
+            }
+        
+    });
+
+    applyPromotionsCart();
+    calculateTotal();
+   
 }
 
 // Exercise 2
