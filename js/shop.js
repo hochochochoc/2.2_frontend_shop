@@ -121,13 +121,33 @@ function calculateTotal() {
     // Calculate total price of the cart using the "cartList" array
     total = cart.reduce(
     (accumulator, product) => accumulator + (product.price * product.quantity), 0
-);
-console.log(total.toFixed(2));
+    );
+    console.log(total.toFixed(2));
 }
 
 // Exercise 4
 function applyPromotionsCart() {
     // Apply promotions to each item in the array "cart"
+    cart.forEach (item => {
+        if (item.id === 1) {
+            if (item.quantity >= 3) {
+                item.price = (10.5 * 0.8).toFixed(2);
+                document.getElementById('price_oil').innerHTML = `<s>$10.5</s> Discount applies: $${item.price}`;
+            } else if (item.quantity < 3) {
+                item.price = 10.50;
+                document.getElementById('price_oil').innerHTML = `$${item.price}`;
+            }
+
+        } else if (item.id === 3) {
+            if (item.quantity >= 10) {
+                item.price = (5 * 0.7).toFixed(2);
+                document.getElementById('price_cupcakes').innerHTML = `<s>$5</s> Discount applies: $${item.price}`;
+            } else if (item.quantity < 10) {
+                item.price = 5.00;
+                document.getElementById('price_cupcakes').innerHTML = `$${item.price}`;
+            }
+        }
+    });
 }
 
 // Exercise 5
