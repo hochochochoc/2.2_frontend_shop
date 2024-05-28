@@ -112,8 +112,8 @@ function cleanCart() {
     
     document.getElementById('count_product').textContent = numberItems;
 
-    document.getElementById('price_oil').innerHTML = '$10.50';
-    document.getElementById('price_cupcakes').innerHTML = '$5.00';
+    document.getElementById('price_oil').innerHTML = '$10.5';
+    document.getElementById('price_cupcakes').innerHTML = '$5';
 }
 
 // Exercise 3
