@@ -71,15 +71,12 @@ var products = [
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 var cart = [];
-
 var total = 0;
-
 var numberItems = 0;
 
 // Exercise 1
 function buy(id) {
-    // 1. Loop for to the array products to get the item to add to cart
-    
+    // 1. Loop for to the array products to get the item to add to cart    
     products.forEach(product => {
         
             if (id === product.id) {
@@ -209,5 +206,3 @@ function removeFromCart(id) {
 function open_modal() {
     printCart();
 }
-
-

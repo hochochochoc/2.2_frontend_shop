@@ -98,5 +98,4 @@ function validate(event) {
 	}else{
 		alert("OK");
 	}
-
 }
