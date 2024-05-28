@@ -153,7 +153,6 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
-
     const cartList = document.getElementById('cart_list');
 
     cartList.innerHTML = '';
@@ -185,9 +184,30 @@ function printCart() {
 
 // Exercise 7
 function removeFromCart(id) {
+    products.forEach(product => {
+        if (id === product.id) {
+            let productCart = cart.find(product => product.id === id);
+            
+            if (productCart) {
+                if (productCart.quantity > 1) {
+                    productCart.quantity -= 1;
+                } else {
+                    let productIndex = cart.findIndex(product => product.id === id);
+                    cart.splice(productIndex, 1);
+                }
 
+            numberItems -= 1;
+            document.getElementById('count_product').textContent = numberItems;
+            }
+        }
+    });
+
+    applyPromotionsCart();
+    calculateTotal();     
 }
 
 function open_modal() {
     printCart();
 }
+
+
