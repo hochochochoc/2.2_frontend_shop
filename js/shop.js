@@ -105,7 +105,15 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
+    cart = [];
+    
+    printCart();
+    numberItems = 0;
+    
+    document.getElementById('count_product').textContent = numberItems;
 
+    document.getElementById('price_oil').innerHTML = '$10.50';
+    document.getElementById('price_cupcakes').innerHTML = '$5.00';
 }
 
 // Exercise 3
