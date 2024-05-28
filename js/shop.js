@@ -153,6 +153,31 @@ function applyPromotionsCart() {
 // Exercise 5
 function printCart() {
     // Fill the shopping cart modal manipulating the shopping cart dom
+
+    const cartList = document.getElementById('cart_list');
+
+    cartList.innerHTML = '';
+
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+        const product = products.find(p => p.id === item.id);
+        if (product) {
+            const total = item.price * item.quantity;
+            totalPrice += total;
+            const itemPrice = parseFloat(item.price);
+
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <th scope="row">${product.name}</th>
+                <td>$${itemPrice.toFixed(2)}</td>
+                <td>${item.quantity}</td>
+                <td>$${total.toFixed(2)}</td>
+            `;
+            cartList.appendChild(row);
+        }
+    });
+    document.getElementById('total_price').textContent = totalPrice.toFixed(2);
 }
 
 
